@@ -1,1 +1,69 @@
-<p>preview works!</p>
+<div class='container'>
+    <div class='fliends'>
+        <div class='detailInfo' *ngIf='singleUser' >
+            <div class="image" >
+                <img [src]="returnImgUrl(singleUser.id)">
+            </div>
+
+            <!-- <legend>info</legend> -->
+            <div class="info">
+                <div class='Pinfo'>
+                    {{singleUser.prefix}}
+                    {{singleUser.name}}
+                    {{singleUser.lastName}}
+                </div>
+                <div>
+                    {{singleUser.title}}
+                </div>
+                <div class='contactInfo'>
+                    <li> Email: {{singleUser.email}}</li>
+                    <li> Ip Address: {{singleUser.ip}}</li>
+                    <li> Job Area: {{singleUser.jobArea}}</li>
+                    <li> Job Type: {{singleUser.jobArea}}</li>
+
+
+
+                </div>
+
+
+
+            </div>
+            <div class="address">
+                <div class=Pinfo>
+                    {{singleUser.company.name}}
+
+
+                </div>
+                <div class='contactInfo'>
+                    <li> City: {{singleUser.address.city}}</li>
+                    <li> Country Address: {{singleUser.address.country}}</li>
+                    <li> State: {{singleUser.address.state}}</li>
+                    <li> Street Address: {{singleUser.address.streetAddress}}</li>
+                    <li> ZIP: {{singleUser.address.zipCode}}</li>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <span></span>
+
+
+        <h2 class='friendTitle'>Friends:</h2>
+        <div class='list' *ngIf='singleUser'>
+
+            <div  (click)='changeFriend(friends.id)' class='item' *ngFor='let friends of allFriends '>
+                <img [src]="returnImgUrl(friends.id)">
+                <div class='title'>
+                    <div class='Pinfo'> {{singleUser.prefix}} {{singleUser.name}} {{singleUser.lastName}}</div>
+                    <div>{{singleUser.title}}</div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

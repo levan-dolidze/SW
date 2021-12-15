@@ -1,15 +1,17 @@
-<div class='container'>
+<div  class='container'>
+
+    <!-- <button (onScroll)="incrementSize($event)">button</button> -->
     <div class='users'>
         <div class='list' *ngIf='allUsers'>
-            <div class='item' *ngFor='let users of allUsers'>
-                <a [routerLink]="['/preview']" routerLinkActive="router-link-active" >
-                    <img [src]="users.imageUrl" alt="">
-                    <div class='title'>
-                        <span class='Pinfo'> {{users.prefix}} {{users.name}} {{users.lastName}}</span>
-                        {{users.title}}
-                    </div>
+            <div (click)="viewDetailsHome(users.id)" class='item' *ngFor='let users of allUsers '>
+        
+             <img  [src]="returnImgUrl(users.id)" >
+            <div class='title'>
+            <span class='Pinfo'> {{users.prefix}} {{users.name}} {{users.lastName}}</span>
+             {{users.title}}
+          </div>
 
-                </a>
+                
 
 
             </div>
@@ -20,3 +22,5 @@
 
     </div>
 </div>
+
+<!-- <button (click)=test() >test</button> -->

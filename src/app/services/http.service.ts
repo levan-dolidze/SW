@@ -1,3 +1,4 @@
+import { FullUserModel } from './../models/fullUserModel';
 import { UserModel } from './../models/UserModel';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -11,10 +12,20 @@ import { Observable } from 'rxjs';
 
 export class HttpService {
   urlAllUsers = environment.allUsers;
+  urlSingleUser = environment.singleUser;
+  urlAllFriends = environment.allFriends;
   constructor(private httpService: HttpClient) { }
 
-  getAllUsers(): Observable<Array<UserModel>> {
-    return this.httpService.get<Array<UserModel>>(`${this.urlAllUsers}/${1}/${20}`);
+  getAllUsers(page: number, size: any): Observable<Array<UserModel>> {
+    return this.httpService.get<Array<UserModel>>(`${this.urlAllUsers}/${page}/${size}`);
   };
+
+  getSingleUser(id: any): Observable<FullUserModel> {
+    return this.httpService.get<FullUserModel>(`${this.urlSingleUser}/${id}`)
+  }
+
+  getListOfAllFriends(userId: number, page: number, size: number): Observable<Array<UserModel>> {
+    return this.httpService.get<Array<UserModel>>(`${this.urlAllFriends}/${userId}/friends/${page}/${size}`)
+  }
 
 };
