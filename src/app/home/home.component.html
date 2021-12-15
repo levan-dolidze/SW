@@ -1,26 +1,26 @@
-<div  class='container'>
+<div class='container'>
 
     <!-- <button (onScroll)="incrementSize($event)">button</button> -->
     <div class='users'>
         <div class='list' *ngIf='allUsers'>
             <div (click)="viewDetailsHome(users.id)" class='item' *ngFor='let users of allUsers '>
-        
-             <img  [src]="returnImgUrl(users.id)" >
-            <div class='title'>
-            <span class='Pinfo'> {{users.prefix}} {{users.name}} {{users.lastName}}</span>
-             {{users.title}}
-          </div>
+                <img [src]="returnImgUrl(users.id)">
+                <div class='title'>
+                    <span class='Pinfo'> {{users.prefix}} {{users.name}} {{users.lastName}}</span>
+                    {{users.title}}
+                </div>
 
-                
+
 
 
             </div>
-
+            <div class='theEnd'>{{theEndMessage}}</div>
 
         </div>
 
 
     </div>
+
 </div>
 
 <!-- <button (click)=test() >test</button> -->

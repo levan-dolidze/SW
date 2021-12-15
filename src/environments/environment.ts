@@ -4,9 +4,8 @@
 
 export const environment = {
   production: false,
-  allUsers:'http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user',
-  singleUser:'http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user',
-  allFriends:'http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user'
+  url:'http://sweeftdigital-intern.eu-central-1.elasticbeanstalk.com/user'
+
 };
 
 /*

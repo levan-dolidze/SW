@@ -11,12 +11,12 @@ import { Observable } from 'rxjs';
 
 
 export class HttpService {
-  urlAllUsers = environment.allUsers;
-  urlSingleUser = environment.singleUser;
-  urlAllFriends = environment.allFriends;
+  urlAllUsers = environment.url;
+  urlSingleUser = environment.url;
+  urlAllFriends = environment.url;
   constructor(private httpService: HttpClient) { }
 
-  getAllUsers(page: number, size: any): Observable<Array<UserModel>> {
+  getAllUsers(page: number, size: number): Observable<Array<UserModel>> {
     return this.httpService.get<Array<UserModel>>(`${this.urlAllUsers}/${page}/${size}`);
   };
 

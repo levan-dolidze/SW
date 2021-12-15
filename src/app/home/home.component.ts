@@ -1,3 +1,4 @@
+import { ErrorMessagesService } from './../services/error-messages.service';
 import { PassIdService } from './../services/pass-id.service';
 import { Router, Routes } from '@angular/router';
 import { UserModel } from './../models/UserModel';
@@ -19,12 +20,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   allUsers: Array<UserModel> = [];
   allUser: any;
   allUsersDistr: Subscription;
-  count: number = 0;
-
-  constructor(private http: HttpService, private router: Router, private passId: PassIdService) { }
+  // imgCount: number = 0;
+  sizeCount: number = 0;
+  pageCount: number = 1;
+  theEndMessage: string;
+  constructor(private http: HttpService, private router: Router, private errorMesage: ErrorMessagesService) { }
 
   ngOnInit(): void {
-    this.returnAllUsers(1, this.test)
+    this.returnAllUsers(this.page, this.size)
     this.infiniteScroll();
 
 
@@ -34,23 +37,25 @@ export class HomeComponent implements OnInit, OnDestroy {
   infiniteScroll() {
     window.addEventListener('scroll', () => {
       if (window.scrollY + window.innerHeight > document.documentElement.scrollHeight) {
-        this.allUsersDistr = this.http.getAllUsers(this.incrementPage, this.test).subscribe((response) => {
+        // if (this.test < 120) {
+        this.allUsersDistr = this.http.getAllUsers(this.page, this.size).subscribe((response) => {
           this.allUser = response;
           this.allUsers = this.allUser.list;
+        }, error => {
+          this.theEndMessage = this.errorMesage.imagesRunOut()
         });
-      }
-    })
+        // }
 
-  }
+      };
+    });
 
-  get incrementPage() {
-    let count = 1
-    return count
-  }
+  };
 
-  incrementSize(event: any) {
-  
-  }
+
+
+  // incrementSize(event: any) {
+
+  // }
 
 
 
@@ -59,14 +64,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.allUsersDistr = this.http.getAllUsers(page, size).subscribe((response) => {
       this.allUser = response;
       this.allUsers = this.allUser.list;
-      console.log(this.allUsers)
+
     });
 
   };
 
   viewDetailsHome(id: any) {
     this.router.navigate([`preview/${id}`])
-    this.count++
+    
   }
   ngOnDestroy(): void {
     this.allUsersDistr.unsubscribe();
@@ -79,7 +84,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     return `http://placeimg.com/640/480/animals?${id}`
   }
-  // test(number = 0) {
+  // testRecurs(number = 0) {
   //   console.log(number)
   //   if (number == 20) {
   //     return
@@ -89,9 +94,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   //   this.test(number)
   // }
-  get test() {
-    this.count += 20
-    return this.count
+  get size() {
+    this.sizeCount += 20
+    return this.sizeCount;
+  };
+  get page() {
+    let count = 1
+    return count;
   }
 
 };
