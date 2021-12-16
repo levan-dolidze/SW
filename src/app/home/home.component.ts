@@ -1,14 +1,13 @@
 import { ErrorMessagesService } from './../services/error-messages.service';
-import { PassIdService } from './../services/pass-id.service';
-import { Router, Routes } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserModel } from './../models/UserModel';
 import { HttpService } from './../services/http.service';
 import { Component, OnDestroy, OnInit, Injectable } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 
 @Component({
-  selector: 'app-home',
+  selector: 'home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css', '../common-css.css']
 })
@@ -20,10 +19,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   allUsers: Array<UserModel> = [];
   allUser: any;
   allUsersDistr: Subscription;
-  // imgCount: number = 0;
   sizeCount: number = 0;
   pageCount: number = 1;
   theEndMessage: string;
+
   constructor(private http: HttpService, private router: Router, private errorMesage: ErrorMessagesService) { }
 
   ngOnInit(): void {
@@ -39,7 +38,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     let count = 1
     return count;
   };
-
+  //ინფინიტ სკროლის ფუნქცია როდესაც პირობა სრულდება სწროლის ივენთზე იძახებს სერვისიდან returnAllUsers მეთოდს
+  // რომელიც აბრუნებს ყველა ცხოველის ინფოს და გადაეცემა პარამეტრები რამდენი ობიექტი წამოიღოს
   infiniteScroll() {
     window.addEventListener('scroll', () => {
       if (window.scrollY + window.innerHeight > document.documentElement.scrollHeight) {
@@ -47,12 +47,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       };
     });
   };
-
-
-
-  // incrementSize(event: any) {
-
-  // }
 
 
 
@@ -75,8 +69,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
 
-  returnImgUrl(id: any) {
-    return `http://placeimg.com/640/480/animals?${id}`
+  returnImgUrl(id: any): any {
+    for (let index = 0; index < this.allUsers.length; index++) {
+      return `${this.allUsers[index].imageUrl}?${id}`
+    }
   };
   // testRecurs(number = 0) {
   //   console.log(number)
@@ -89,7 +85,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   //   this.test(number)
   // }
 
-
+ 
 };
+
 
 

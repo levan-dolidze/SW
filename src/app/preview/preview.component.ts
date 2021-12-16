@@ -1,14 +1,14 @@
 import { ErrorMessagesService } from './../services/error-messages.service';
 import { Subscription } from 'rxjs';
-import { PassIdService } from './../services/pass-id.service';
 import { UserModel } from './../models/UserModel';
 import { FullUserModel } from './../models/fullUserModel';
 import { HttpService } from './../services/http.service';
-import { Component, OnChanges, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Routes, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
-  selector: 'app-preview',
+  selector: 'preview',
   templateUrl: './preview.component.html',
   styleUrls: ['./preview.component.css', '../common-css.css']
 })
@@ -18,11 +18,11 @@ export class PreviewComponent implements OnInit, OnDestroy {
   allFriend: any;
   singleUser: FullUserModel;
   sizeCount: number = 0;
-  // theEndMessage: string;
   allFriendsDist: Subscription;
   singleUserDist: Subscription;
-  link: any;
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpService, private router: Router, private errorMesage: ErrorMessagesService) { }
+
+  linkArr: Array<any> = []
+  constructor(private activatedRoute: ActivatedRoute, private http: HttpService, private errorMesage: ErrorMessagesService, private route: Router) { }
 
   ngOnInit(): void {
     this.returnUserId;
@@ -63,43 +63,47 @@ export class PreviewComponent implements OnInit, OnDestroy {
 
 
   changeFriend(userid: any) {
-    // this.returnImgUrl(userid)
-    this.getSingleUser(userid);
-    this.getListOfAllFriends(userid, this.page, 20);
+    this.getSingleUser(userid.id);
+    console.log(userid)
+    this.route.navigate([`preview/${userid.id}`])
+    this.getListOfAllFriends(userid.id, this.page, 20);
+    this.linkArr.push(userid);
 
   };
 
   infiniteScrolling(userId: any) {
     window.addEventListener('scroll', () => {
-      // console.log("scroly y " + window.scrollY)
-      // console.log("inner higt " + window.innerHeight)
-      // console.log("scroll higt " + document.documentElement.scrollHeight)
-
       if (window.scrollY + window.innerHeight > document.documentElement.scrollHeight - 10) {
         this.getListOfAllFriends(userId, this.page, this.size)
       };
     });
-
   };
 
 
   returnImgUrl(id: any) {
-    this.retunrUrl(id)
-    return `http://placeimg.com/640/480/animals?${id}`
+
+    return `${this.singleUser.imageUrl}?${id}`
   };
 
-  returnLink(id?: any) {
-    return `/preview/${id}`
-  }
 
 
-  retunrUrl(id?: any) {
-    return `preview/${id}`
-  };
 
   ngOnDestroy(): void {
     this.allFriendsDist.unsubscribe();
     this.singleUserDist.unsubscribe();
   };
+
+
+
+
+  // returnRouterLinks(id: any) {
+  //   this.getListOfAllFriends(id, this.page, 20);
+  //   this.getSingleUser(id);
+
+  // }
+  navigateFromLink(param: any) {
+    this.getSingleUser(param.id);
+    this.getListOfAllFriends(param.id, this.page, 20);
+  }
 
 };

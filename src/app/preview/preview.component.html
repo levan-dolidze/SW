@@ -5,15 +5,15 @@
                 <img [src]="returnImgUrl(singleUser.id)">
             </div>
 
-            <!-- <legend>info</legend> -->
-            <div class="info">
+            <fieldset class="info">
+                <legend>info</legend>
                 <div class='Pinfo'>
                     {{singleUser.prefix}}
                     {{singleUser.name}}
                     {{singleUser.lastName}}
                 </div>
-                <div>
-                    {{singleUser.title}}
+                <div class='positionName'>
+                    <i>{{singleUser.title}}</i>
                 </div>
                 <div class='contactInfo'>
                     <li> Email: {{singleUser.email}}</li>
@@ -24,8 +24,9 @@
 
 
 
-            </div>
-            <div class="address">
+            </fieldset>
+            <fieldset class="address">
+                <legend>address</legend>
                 <div class=Pinfo>
                     {{singleUser.company.name}}
 
@@ -38,16 +39,24 @@
                     <li> Street Address: {{singleUser.address.streetAddress}}</li>
                     <li> ZIP: {{singleUser.address.zipCode}}</li>
                 </div>
-            </div>
+            </fieldset>
         </div>
 
+   
 
+
+        <div>
+            <a (click)='navigateFromLink(friends)' *ngFor='let friends of linkArr'>
+                <a [routerLink]="['/preview/friends.id']"><span class='routerLinks'> {{friends.prefix}}{{friends.name}}{{friends.lastName}} ></span></a>
+            </a>
+        </div>
+      
 
         <h2 class='friendTitle'>Friends:</h2>
 
 
         <div class='list' *ngIf='singleUser'>
-            <div (click)='changeFriend(friends.id)' class='item' *ngFor='let friends of allFriends '>
+            <div (click)='changeFriend(friends)' class='item' *ngFor='let friends of allFriends '>
                 <img [src]="returnImgUrl(friends.id)">
                 <div class='title'>
                     <div class='Pinfo'> {{friends.prefix}} {{friends.name}} {{friends.lastName}}</div>
@@ -56,5 +65,5 @@
             </div>
         </div>
     </div>
-    <!-- <div class='theEnd'>{{theEndMessage}}</div> -->
+
 </div>
