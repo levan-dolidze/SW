@@ -1,6 +1,4 @@
 <div class='container'>
-
-    <!-- <button (onScroll)="incrementSize($event)">button</button> -->
     <div class='users'>
         <div class='list' *ngIf='allUsers'>
             <div (click)="viewDetailsHome(users.id)" class='item' *ngFor='let users of allUsers '>
@@ -9,18 +7,11 @@
                     <span class='Pinfo'> {{users.prefix}} {{users.name}} {{users.lastName}}</span>
                     {{users.title}}
                 </div>
-
-
-
-
             </div>
             <div class='theEnd'>{{theEndMessage}}</div>
 
         </div>
 
-
     </div>
 
 </div>
-
-<!-- <button (click)=test() >test</button> -->

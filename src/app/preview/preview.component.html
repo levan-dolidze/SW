@@ -1,7 +1,7 @@
 <div class='container'>
     <div class='fliends'>
-        <div class='detailInfo' *ngIf='singleUser' >
-            <div class="image" >
+        <div class='detailInfo' *ngIf='singleUser'>
+            <div class="image">
                 <img [src]="returnImgUrl(singleUser.id)">
             </div>
 
@@ -20,9 +20,6 @@
                     <li> Ip Address: {{singleUser.ip}}</li>
                     <li> Job Area: {{singleUser.jobArea}}</li>
                     <li> Job Type: {{singleUser.jobArea}}</li>
-
-
-
                 </div>
 
 
@@ -40,34 +37,24 @@
                     <li> State: {{singleUser.address.state}}</li>
                     <li> Street Address: {{singleUser.address.streetAddress}}</li>
                     <li> ZIP: {{singleUser.address.zipCode}}</li>
-
-
-
                 </div>
             </div>
         </div>
 
-<!-- 
-        <span  *ngFor='let friends of allFriends '>
-            <a [routerLink]="['/retunrUrl(friends.id)']" >link</a>
-        </span> -->
 
 
         <h2 class='friendTitle'>Friends:</h2>
 
-     
-        <div class='list' *ngIf='singleUser'>
 
-            <div  (click)='changeFriend(friends.id)' class='item' *ngFor='let friends of allFriends '>
+        <div class='list' *ngIf='singleUser'>
+            <div (click)='changeFriend(friends.id)' class='item' *ngFor='let friends of allFriends '>
                 <img [src]="returnImgUrl(friends.id)">
                 <div class='title'>
                     <div class='Pinfo'> {{friends.prefix}} {{friends.name}} {{friends.lastName}}</div>
                     <div>{{friends.title}}</div>
-
                 </div>
             </div>
-
-            <div class='theEnd'>{{theEndMessage}}</div>
         </div>
     </div>
+    <!-- <div class='theEnd'>{{theEndMessage}}</div> -->
 </div>

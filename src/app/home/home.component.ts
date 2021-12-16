@@ -29,26 +29,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.returnAllUsers(this.page, this.size)
     this.infiniteScroll();
-
-
   };
 
+  get size() {
+    this.sizeCount += 20
+    return this.sizeCount;
+  };
+  get page() {
+    let count = 1
+    return count;
+  };
 
   infiniteScroll() {
     window.addEventListener('scroll', () => {
       if (window.scrollY + window.innerHeight > document.documentElement.scrollHeight) {
-        // if (this.test < 120) {
-        this.allUsersDistr = this.http.getAllUsers(this.page, this.size).subscribe((response) => {
-          this.allUser = response;
-          this.allUsers = this.allUser.list;
-        }, error => {
-          this.theEndMessage = this.errorMesage.imagesRunOut()
-        });
-        // }
-
+        this.returnAllUsers(this.page, this.size)
       };
     });
-
   };
 
 
@@ -60,30 +57,27 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   returnAllUsers(page: any, size: any) {
-
     this.allUsersDistr = this.http.getAllUsers(page, size).subscribe((response) => {
       this.allUser = response;
       this.allUsers = this.allUser.list;
-
+    }, error => {
+      this.theEndMessage = this.errorMesage.imagesRunOut();
     });
-
   };
+
 
   viewDetailsHome(id: any) {
     this.router.navigate([`preview/${id}`])
-    
-  }
+  };
   ngOnDestroy(): void {
     this.allUsersDistr.unsubscribe();
-
-  };
+  };;
 
 
 
   returnImgUrl(id: any) {
-
     return `http://placeimg.com/640/480/animals?${id}`
-  }
+  };
   // testRecurs(number = 0) {
   //   console.log(number)
   //   if (number == 20) {
@@ -94,14 +88,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   //   this.test(number)
   // }
-  get size() {
-    this.sizeCount += 20
-    return this.sizeCount;
-  };
-  get page() {
-    let count = 1
-    return count;
-  }
+
 
 };
 
