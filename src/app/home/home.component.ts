@@ -63,17 +63,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   viewDetailsHome(id: any) {
     this.router.navigate([`preview/${id}`])
   };
-  ngOnDestroy(): void {
-    this.allUsersDistr.unsubscribe();
-  };;
-
-
 
   returnImgUrl(id: any): any {
     for (let index = 0; index < this.allUsers.length; index++) {
       return `${this.allUsers[index].imageUrl}?${id}`
-    }
+    };
   };
+  
+  ngOnDestroy(): void {
+    this.allUsersDistr.unsubscribe();
+  };;
   // testRecurs(number = 0) {
   //   console.log(number)
   //   if (number == 20) {

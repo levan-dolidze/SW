@@ -30,6 +30,9 @@
    margin:10px;
 
 }
+.infoTitle{
+    text-decoration: underline;
+}
 .friendTitle,.routerLinks{
     padding: 10px;
 }
@@ -54,7 +57,4 @@
       width: 100%;
     }
  
-    .friendTitle{
-        margin-top: 360px;
-    }
   }

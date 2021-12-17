@@ -16,10 +16,10 @@
                     <i>{{singleUser.title}}</i>
                 </div>
                 <div class='contactInfo'>
-                    <li> Email: {{singleUser.email}}</li>
-                    <li> Ip Address: {{singleUser.ip}}</li>
-                    <li> Job Area: {{singleUser.jobArea}}</li>
-                    <li> Job Type: {{singleUser.jobArea}}</li>
+                    <li> <span class=infoTitle> Email:</span> {{singleUser.email}}</li>
+                    <li> <span class=infoTitle>Ip Address: </span> {{singleUser.ip}}</li>
+                    <li> <span class=infoTitle>Job Area:</span> {{singleUser.jobArea}}</li>
+                    <li> <span class=infoTitle>Job Type: </span> {{singleUser.jobArea}}</li>
                 </div>
 
 
@@ -33,24 +33,25 @@
 
                 </div>
                 <div class='contactInfo'>
-                    <li> City: {{singleUser.address.city}}</li>
-                    <li> Country Address: {{singleUser.address.country}}</li>
-                    <li> State: {{singleUser.address.state}}</li>
-                    <li> Street Address: {{singleUser.address.streetAddress}}</li>
-                    <li> ZIP: {{singleUser.address.zipCode}}</li>
+                    <li> <span class=infoTitle>City:</span> {{singleUser.address.city}}</li>
+                    <li> <span class=infoTitle> Country Address:</span> {{singleUser.address.country}}</li>
+                    <li> <span class=infoTitle> State:</span> {{singleUser.address.state}}</li>
+                    <li> <span class=infoTitle> Street Address: </span>{{singleUser.address.streetAddress}}</li>
+                    <li> <span class=infoTitle> ZIP:</span> {{singleUser.address.zipCode}}</li>
                 </div>
             </fieldset>
         </div>
 
-   
+
 
 
         <div>
             <a (click)='navigateFromLink(friends)' *ngFor='let friends of linkArr'>
-                <a [routerLink]="['/preview/friends.id']"><span class='routerLinks'> {{friends.prefix}}{{friends.name}}{{friends.lastName}} ></span></a>
+                <a [routerLink]="['/preview/friends.id']"><span class='routerLinks'>
+                        {{friends.prefix}}{{friends.name}}{{friends.lastName}} ></span></a>
             </a>
         </div>
-      
+
 
         <h2 class='friendTitle'>Friends:</h2>
 

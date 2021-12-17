@@ -86,24 +86,14 @@ export class PreviewComponent implements OnInit, OnDestroy {
   };
 
 
-
+  navigateFromLink(param: any) {
+    this.getSingleUser(param.id);
+    this.getListOfAllFriends(param.id, this.page, 20);
+  };
 
   ngOnDestroy(): void {
     this.allFriendsDist.unsubscribe();
     this.singleUserDist.unsubscribe();
   };
-
-
-
-
-  // returnRouterLinks(id: any) {
-  //   this.getListOfAllFriends(id, this.page, 20);
-  //   this.getSingleUser(id);
-
-  // }
-  navigateFromLink(param: any) {
-    this.getSingleUser(param.id);
-    this.getListOfAllFriends(param.id, this.page, 20);
-  }
 
 };
